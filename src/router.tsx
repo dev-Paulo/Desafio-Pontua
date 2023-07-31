@@ -1,4 +1,4 @@
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Topbar } from "./components/Topbar/Topbar";
 import { Home } from "./pages/Home/Home";
@@ -8,9 +8,7 @@ import { Perfil } from "./pages/Perfil/Perfil";
 export function AppRoutes() {
   return (
     <div className="app">
-      <aside>
-        <Sidebar />
-      </aside>
+      <Sidebar />
 
       <main className="content">
         <Topbar />
