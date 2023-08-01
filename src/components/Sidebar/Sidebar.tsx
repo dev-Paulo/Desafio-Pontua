@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logoPontua from "../../assets/logo-pontua.svg";
 
 export function Sidebar() {
@@ -41,7 +42,7 @@ export function Sidebar() {
           </a>
           <ul className="space-y-2 font-medium">
             <li>
-              <a
+              {/* <a
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -56,10 +57,22 @@ export function Sidebar() {
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
                 <span className="ml-3">Home</span>
-              </a>
+              </a> */}
+              <Link
+                  // onClick={() => {
+                  //   setIndexAtivo(index);
+                  //   localStorage.setItem("indexAtivo", index.toString()!);                    
+                  // }}
+                  aria-controls="example-collapse-text"
+                  to={'/home'}
+                  // className={`opcao-menu  ${
+                  //   indexAtivo == index ? "activado" : ""
+                  // }`}
+                  style={{ textDecoration: "none" }}
+                >Home</Link>
             </li>
             <li>
-              <a
+              {/* <a
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -74,7 +87,19 @@ export function Sidebar() {
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
                 <span className="ml-3">Perfil</span>
-              </a>
+              </a> */}
+                 <Link
+                  // onClick={() => {
+                  //   setIndexAtivo(index);
+                  //   localStorage.setItem("indexAtivo", index.toString()!);                    
+                  // }}
+                  aria-controls="example-collapse-text"
+                  to={'/perfil'}
+                  // className={`opcao-menu  ${
+                  //   indexAtivo == index ? "activado" : ""
+                  // }`}
+                  style={{ textDecoration: "none" }}
+                >Perfil</Link>
             </li>
             <li>
               <a
