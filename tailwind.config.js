@@ -10,6 +10,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Epilogue', 'Inter', 'sans-serif'],
+        profile: ['Inter', 'sans-serif']
         //serif: ['Inter', 'serif'],
       },
       colors: {
@@ -19,6 +20,7 @@ export default {
         gray: {
           background: '#f5f6f8',          
           500: '#777777',
+          400: '#717171',
           100: '#eaecf0',
           
         },

@@ -1,14 +1,209 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Params, useParams } from "react-router-dom";
 
-/* eslint-disable @typescript-eslint/no-var-requires */
 export function Perfil() {
-  
+  const params = useParams<Params>();
+  const [character, setCharacter] = useState({});
+  const publicKey = `${import.meta.env.VITE_MARVEL_PUBLIC_API_KEY}`;
+
+  async function fetchCharacter() {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_MARVEL_URL}/characters/${
+          params.id
+        }?apikey=${publicKey}`
+      );
+      const data = response.data;
+      setCharacter(data.data.results[0]);
+      // Handle the data and update your component state or perform other actions
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
   useEffect(() => {
-    
-  }, [])
+    fetchCharacter();
+  }, []);
+
+  console.log(character);
   return (
-    <main className="flex-1 ml-72 mt-4">
-      <div className=" w-3/4">Pagina Perfil</div>
+    <main className="flex-1 ml-64 mt-4 p-5">
+      <div className="flex flex-row align-center">
+        <p className="text-2xl font-bold">
+          Perfil <span className="text-orange-500 mr-2">/</span>
+        </p>
+        <p className="text-2xl font-light">{character.name}</p>
+      </div>
+      <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+        <ul
+          className="flex flex-wrap -mb-px text-sm font-medium text-center"
+          id="myTab"
+          data-tabs-toggle="#myTabContent"
+          role="tablist"
+        >
+          <li className="mr-2" role="presentation">
+            <button
+              className="inline-block p-4 border-b-2 rounded-t-lg"
+              id="profile-tab"
+              data-tabs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              Visão Geral
+            </button>
+          </li>
+          <li className="mr-2" role="presentation">
+            <button
+              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              id="quadrinhos-tab"
+              data-tabs-target="#quadrinhos"
+              type="button"
+              role="tab"
+              aria-controls="quadrinhos"
+              aria-selected="false"
+            >
+              Quadrinhos
+            </button>
+          </li>
+          <li className="mr-2" role="presentation">
+            <button
+              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              id="series-tab"
+              data-tabs-target="#series"
+              type="button"
+              role="tab"
+              aria-controls="series"
+              aria-selected="false"
+            >
+              Séries
+            </button>
+          </li>
+          <li role="presentation">
+            <button
+              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              id="historias-tab"
+              data-tabs-target="#historias"
+              type="button"
+              role="tab"
+              aria-controls="historias"
+              aria-selected="false"
+            >
+              Histórias
+            </button>
+          </li>
+          <li role="presentation">
+            <button
+              className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+              id="eventos-tab"
+              data-tabs-target="#eventos"
+              type="button"
+              role="tab"
+              aria-controls="eventos"
+              aria-selected="false"
+            >
+              Eventos
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div id="myTabContent">
+        <div
+          className="hidden bg-gray-50 dark:bg-gray-800"
+          id="profile"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+        >
+          <div className="flex flex-col w-full flex-1 items-center p-12  bg-white border border-gray-200 rounded-lg shadow md:flex-row  hover:bg-gray-className=0 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <img
+              className="w-24 h-24 rounded-full"
+              src={
+                character?.thumbnail?.path +
+                "." +
+                character?.thumbnail?.extension
+              }
+              alt=""
+            />
+
+            <div className="flex flex-col justify-between p-4 leading-normal">
+              <h5 className="mb-2 text-2xl font-bold tracking-tight text-blue-600 dark:text-white">
+                {character?.name}
+              </h5>
+              <p className="mb-3 font-semibold text-gray-400 dark:text-gray-400 ">
+                {character?.description}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          className="hidden "
+          id="quadrinhos"
+          role="tabpanel"
+          aria-labelledby="quadrinhos-tab"
+        >
+          <ul className="list-disc p-12">
+            {character?.comics?.items?.map((comic) => {
+              return (
+                <li className="font-profile text-gray-500 font-bold">
+                  {comic.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div
+          className="hidden "
+          id="series"
+          role="tabpanel"
+          aria-labelledby="series-tab"
+        >
+          <ul className="list-disc p-12">
+            {character?.series?.items?.map((serie) => {
+              return (
+                <li className="font-profile text-gray-500 font-bold">
+                  {serie.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div
+          className="hidden "
+          id="historias"
+          role="tabpanel"
+          aria-labelledby="historias-tab"
+        >
+          <ul className="list-disc p-12">
+            {character?.stories?.items?.map((historia) => {
+              return (
+                <li className="font-profile text-gray-500 font-bold">
+                  {historia.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div
+          className="hidden "
+          id="eventos"
+          role="tabpanel"
+          aria-labelledby="eventos-tab"
+        >
+          <ul className="list-disc p-12">
+            {character?.events?.items?.map((evento) => {
+              return (
+                <li className="font-profile text-gray-500 font-bold">
+                  {evento.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </main>
   );
 }

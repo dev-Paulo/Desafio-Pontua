@@ -28,9 +28,30 @@ function LayoutWrapper({ children }: LayoutWrapperProps) {
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<LayoutWrapper><Login /></LayoutWrapper>} />
-      <Route path="/home" element={<LayoutWrapper><Home /></LayoutWrapper>} />
-      <Route path="/perfil" element={<LayoutWrapper><Perfil /></LayoutWrapper>} />
+      <Route
+        path="/"
+        element={
+          <LayoutWrapper>
+            <Login />
+          </LayoutWrapper>
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <LayoutWrapper>
+            <Home />
+          </LayoutWrapper>
+        }
+      />
+      <Route
+        path="/perfil/:id"
+        element={
+          <LayoutWrapper>
+            <Perfil />
+          </LayoutWrapper>
+        }
+      />
     </Routes>
   );
 }
