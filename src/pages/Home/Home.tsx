@@ -12,7 +12,7 @@ export function Home() {
       const response = await axios.get(
         `${
           import.meta.env.VITE_MARVEL_URL
-        }/characters?limit=10&offset=400&apikey=${publicKey}`
+        }/characters?limit=10&offset=260&apikey=${publicKey}`
       );
       const data = response.data;
       setCharacters(data.data.results);
@@ -36,13 +36,13 @@ export function Home() {
             <a
               key={character.id}
               href=""
-              className="flex flex-col  h-48 items-center  bg-gray-100 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+              className="flex flex-col p-4  h-48 items-center  bg-gray-100 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
               onClick={() => {
                 navigate(`/perfil/${character.id}`);
               }}
             >
               <img
-                className="object-contain  max-h-full w-full rounded-t-lg  md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                className="object-cover h-full max-h-full w-full rounded-md  md:h-auto md:w-48  md:rounded-l-lg"
                 src={
                   character.thumbnail.path + "." + character.thumbnail.extension
                 }

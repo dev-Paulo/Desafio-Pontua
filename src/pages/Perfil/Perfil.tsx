@@ -36,9 +36,9 @@ export function Perfil() {
         </p>
         <p className="text-2xl font-light">{character.name}</p>
       </div>
-      <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="  border-gray-200 dark:border-gray-700">
         <ul
-          className="flex flex-wrap -mb-px text-sm font-medium text-center"
+          className="flex flex-wrap text-sm font-medium text-center"
           id="myTab"
           data-tabs-toggle="#myTabContent"
           role="tablist"
@@ -112,7 +112,7 @@ export function Perfil() {
       </div>
       <div id="myTabContent">
         <div
-          className="hidden bg-gray-50 dark:bg-gray-800"
+          className="hidden  dark:bg-gray-800 pt-8"
           id="profile"
           role="tabpanel"
           aria-labelledby="profile-tab"
@@ -144,7 +144,7 @@ export function Perfil() {
           role="tabpanel"
           aria-labelledby="quadrinhos-tab"
         >
-          <ul className="list-disc p-12">
+          <ul className="list-disc p-8">
             {character?.comics?.items?.map((comic) => {
               return (
                 <li className="font-profile text-gray-500 font-bold">
@@ -154,14 +154,13 @@ export function Perfil() {
             })}
           </ul>
         </div>
-
         <div
           className="hidden "
           id="series"
           role="tabpanel"
           aria-labelledby="series-tab"
         >
-          <ul className="list-disc p-12">
+          <ul className="list-disc p-8">
             {character?.series?.items?.map((serie) => {
               return (
                 <li className="font-profile text-gray-500 font-bold">
@@ -177,7 +176,7 @@ export function Perfil() {
           role="tabpanel"
           aria-labelledby="historias-tab"
         >
-          <ul className="list-disc p-12">
+          <ul className="list-disc p-8">
             {character?.stories?.items?.map((historia) => {
               return (
                 <li className="font-profile text-gray-500 font-bold">
@@ -193,7 +192,7 @@ export function Perfil() {
           role="tabpanel"
           aria-labelledby="eventos-tab"
         >
-          <ul className="list-disc p-12">
+          <ul className="list-disc p-8">
             {character?.events?.items?.map((evento) => {
               return (
                 <li className="font-profile text-gray-500 font-bold">
