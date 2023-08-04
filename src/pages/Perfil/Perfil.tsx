@@ -29,7 +29,9 @@ export function Perfil() {
 
   console.log(character);
   return (
-    <main className="flex-1 ml-64 mt-4 p-5">
+    // <main className="flex-1 ml-64 mt-4 p-5">
+    <>
+    <div className="p-8">
       <div className="flex flex-row align-center">
         <p className="text-2xl font-bold">
           Perfil <span className="text-orange-500 mr-2">/</span>
@@ -203,6 +205,8 @@ export function Perfil() {
           </ul>
         </div>
       </div>
-    </main>
+      </div>
+      </>
+    // </main>
   );
 }

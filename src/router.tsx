@@ -17,8 +17,9 @@ function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
     <div className="app">
       {!isLoginPage && <Sidebar />}
-      <main className="content">
-        {!isLoginPage && <Topbar />}
+      <main className="content flex-1   ">
+    
+        {!isLoginPage && <Topbar /> }
         {children}
       </main>
     </div>

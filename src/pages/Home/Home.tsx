@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 
 export function Home() {
   const [characters, setCharacters] = useState([]);
   const publicKey = `${import.meta.env.VITE_MARVEL_PUBLIC_API_KEY}`;
   const navigate = useNavigate();
+  const [totalCharacters, setTotalCharacters] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+ 
+
 
   async function fetchData() {
     try {
+      const offset = currentPage * 10
       const response = await axios.get(
         `${
           import.meta.env.VITE_MARVEL_URL
-        }/characters?limit=10&offset=260&apikey=${publicKey}`
+        }/characters?limit=10&offset=${offset}&apikey=${publicKey}`
       );
       const data = response.data;
       setCharacters(data.data.results);
+      setTotalCharacters(data.data.total)
       // Handle the data and update your component state or perform other actions
       console.log(data);
     } catch (error) {
@@ -23,33 +30,33 @@ export function Home() {
     }
   }
 
+  const handlePageChange = (selectedPage: { selected: number }) => {
+    setCurrentPage(selectedPage.selected);
+  }
+
+  const lastTwoItems = characters?.slice(-2)
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [currentPage]);
+
+ 
 
   console.log(characters);
   return (
-    <main className="flex-1 ml-64 mt-4 p-10">
-      <div className="grid grid-cols-4 gap-4 md:grid-cols-4 xs:grid-cols-2">
+    // <main className="flex-1 ml-64 mt-4 p-10">
+    <>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4  p-10 ">
         {characters.map((character) => {
           return (
-            <a
-              key={character.id}
-              href=""
-              className="flex flex-col p-4  h-48 items-center  bg-gray-100 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-              onClick={() => {
-                navigate(`/perfil/${character.id}`);
-              }}
-            >
-              <img
-                className="object-cover h-full max-h-full w-full rounded-md  md:h-auto md:w-48  md:rounded-l-lg"
-                src={
+            <a key={character.id} href="" className={`flex flex-col col-span-${lastTwoItems.includes(character) ? '2' : '1'} p-4 h-48 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`} onClick={() => {
+              navigate(`/perfil/${character.id}`)
+            }}>
+    <img className="object-cover w-full h-auto rounded-md md:h-48 md:w-28 max-h-full"  src={
                   character.thumbnail.path + "." + character.thumbnail.extension
                 }
-                alt=""
-              />
-
-              <div className="flex flex-col justify-between p-4 leading-normal">
+                alt="" />
+    <div className="flex flex-col justify-between p-4 leading-normal">
                 <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                   {character.name}
                 </h5>
@@ -57,19 +64,17 @@ export function Home() {
                   {character.description}
                 </p>
               </div>
-            </a>
-          );
+</a>
+          
+          )
         })}
       </div>
       <div className="flex flex-row justify-center mt-20">
-        <nav aria-label="Page navigation example">
-          <ul className="inline-flex -space-x-px text-base h-10">
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                <svg
+       
+        <ReactPaginate
+        previousLabel={
+          <span className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <svg
                   className="w-3.5 h-3.5 mr-2"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
@@ -84,57 +89,13 @@ export function Home() {
                     d="M13 5H1m0 0 4 4M1 5l4-4"
                   />
                 </svg>
-                Anterior
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                1
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                2
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                aria-current="page"
-                className="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-              >
-                3
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                4
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                5
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                Próxima
-                <svg
+            Anterior
+          </span>
+        }
+        nextLabel={          
+          <span className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            Próxima
+            <svg
                   className="w-3.5 h-3.5 ml-2"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
@@ -149,11 +110,16 @@ export function Home() {
                     d="M1 5h12m0 0L9 1m4 4L9 9"
                   />
                 </svg>
-              </a>
-            </li>
-          </ul>
-        </nav>
+          </span>
+        }
+        pageCount={Math.ceil(totalCharacters / 10)} // Calculate total pages based on character count
+        onPageChange={handlePageChange}
+        containerClassName={'flex items-center justify-center px-4 h-10 leading-tight '}
+        activeClassName={'text-blue-500 '}
+        pageClassName="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+/>
       </div>
-    </main>
+      </>
+    // </main>
   );
 }

@@ -27,12 +27,12 @@ export function Sidebar() {
         </svg>
       </button>
 
-      <aside
+      {/* <aside
         id="default-sidebar"
         className="fixed top-0 left-0 z-40  h-screen transition-transform -translate-x-full sm:translate-x-0 w-64"
         aria-label="Sidebar"
-      >
-        <div className="h-full px-4 py-5 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+      > */}
+        <div className="h-full w-64 px-4 py-5 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <a href="" className="flex items-center pl-2.5 mb-5">
             <img
               src={logoPontua}
@@ -121,7 +121,7 @@ export function Sidebar() {
             </li>
           </ul>
         </div>
-      </aside>
+      {/* </aside> */}
     </>
   );
 }

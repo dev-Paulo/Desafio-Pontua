@@ -1,9 +1,14 @@
+import { useState } from "react";
+
 export function Topbar() {
+  const [search, setSearch] = useState('')
+
+  console.log(search)
   return (
     <>
       <nav className="bg-white border-divider border-b-2  dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-start mx-auto p-4">
-          <div className="flex md:order-2">
+        <div className="max-w-screen-xl flex flex-wrap items-center   p-4">
+          {/* <div className="flex md:order-2">
             <button
               type="button"
               data-collapse-toggle="navbar-search"
@@ -78,12 +83,12 @@ export function Topbar() {
                 />
               </svg>
             </button>
-          </div>
+          </div> */}
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className="items-center justify-between w-full md:flex md:w-auto md:order-1"
             id="navbar-search"
           >
-            <div className="relative mt-3 md:hidden">
+            <div className="relative mt-3">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                   className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -106,6 +111,10 @@ export function Topbar() {
                 id="search-navbar"
                 className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Busque um agente"
+                onChange={(e) => {
+                  
+                  setSearch(e.target.value)
+                }}
               />
             </div>
           </div>
