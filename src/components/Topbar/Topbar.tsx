@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { SetStateAction } from "react";
 
-export function Topbar() {
-  const [search, setSearch] = useState('')
+interface TopbarProps {
+  setCharacterSearch: React.Dispatch<SetStateAction<string | "">>
+}
 
-  console.log(search)
+export function Topbar({setCharacterSearch}:TopbarProps) {
+
   return (
     <>
       <nav className="bg-white border-divider border-b-2  dark:bg-gray-900">
@@ -112,8 +114,9 @@ export function Topbar() {
                 className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Busque um agente"
                 onChange={(e) => {
+                  setCharacterSearch(e.target.value)
                   
-                  setSearch(e.target.value)
+                
                 }}
               />
             </div>

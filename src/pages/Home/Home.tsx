@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
+import { Topbar } from "../../components/Topbar/Topbar";
+import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 export function Home() {
   const [characters, setCharacters] = useState([]);
+  const [characterSearch, setCharacterSearch] = useState<
+    string | ""
+  >("")
   const publicKey = `${import.meta.env.VITE_MARVEL_PUBLIC_API_KEY}`;
   const navigate = useNavigate();
   const [totalCharacters, setTotalCharacters] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
- 
+
 
 
   async function fetchData() {
@@ -18,7 +23,7 @@ export function Home() {
       const response = await axios.get(
         `${
           import.meta.env.VITE_MARVEL_URL
-        }/characters?limit=10&offset=${offset}&apikey=${publicKey}`
+        }/characters?${characterSearch != "" ? `nameStartsWith=${characterSearch}` : "" }&limit=10&offset=${offset}&apikey=${publicKey}`
       );
       const data = response.data;
       setCharacters(data.data.results);
@@ -38,7 +43,9 @@ export function Home() {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, characterSearch]);
+
+  console.log(characterSearch)
 
  
 
@@ -46,13 +53,19 @@ export function Home() {
   return (
     // <main className="flex-1 ml-64 mt-4 p-10">
     <>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4  p-10 ">
+    
+      <Sidebar />
+    
+    
+    <div className="sm:ml-64 flex-1">
+    <Topbar setCharacterSearch={setCharacterSearch} />
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-4  p-10 ">
         {characters.map((character) => {
           return (
-            <a key={character.id} href="" className={`flex flex-col col-span-${lastTwoItems.includes(character) ? '2' : '1'} p-4 h-48 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`} onClick={() => {
+            <a key={character.id} href="" className={`flex flex-col col-span-${lastTwoItems.includes(character) && characters.length >= 10 ? '2' : '1'} p-4 h-48 items-center bg-gray-100 border border-gray-200 rounded-2xl shadow md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`} onClick={() => {
               navigate(`/perfil/${character.id}`)
             }}>
-    <img className="object-cover w-full h-auto rounded-md md:h-48 md:w-28 max-h-full"  src={
+    <img className="object-cover w-full h-auto rounded-xl md:h-48 md:w-28 max-h-full"  src={
                   character.thumbnail.path + "." + character.thumbnail.extension
                 }
                 alt="" />
@@ -115,10 +128,12 @@ export function Home() {
         pageCount={Math.ceil(totalCharacters / 10)} // Calculate total pages based on character count
         onPageChange={handlePageChange}
         containerClassName={'flex items-center justify-center px-4 h-10 leading-tight '}
-        activeClassName={'text-blue-500 '}
+        activeClassName={'text-blue-500 bg-blue-100'}
         pageClassName="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 />
       </div>
+    </div>
+      
       </>
     // </main>
   );

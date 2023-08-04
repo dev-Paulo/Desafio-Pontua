@@ -1,30 +1,35 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { Topbar } from "./components/Topbar/Topbar";
+
 import { Home } from "./pages/Home/Home";
 import { Login } from "./pages/Login/Login";
 import { Perfil } from "./pages/Perfil/Perfil";
 
-interface LayoutWrapperProps {
-  children: React.ReactNode;
-}
+// interface LayoutWrapperProps {
+//   children: React.ReactNode;
+// }
 
 // Custom wrapper component to conditionally render topbar and sidebar
-function LayoutWrapper({ children }: LayoutWrapperProps) {
-  const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
+// function LayoutWrapper({ children }: LayoutWrapperProps) {
+//   const location = useLocation();
+//   const isLoginPage = location.pathname === "/login";
 
-  return (
-    <div className="app">
-      {!isLoginPage && <Sidebar />}
-      <main className="content flex-1   ">
+//   return (
+//     <div className="app">
+//       {!isLoginPage && 
+//       <>
+//       <Sidebar />
+//       <div className="  p-4 sm:ml-64 ">
     
-        {!isLoginPage && <Topbar /> }
-        {children}
-      </main>
-    </div>
-  );
-}
+//         {/* {!isLoginPage && <Topbar /> } */}
+//         {children}
+//       </div>
+//       </>
+//       }
+      
+//     </div>
+//   );
+// }
 
 export function AppRoutes() {
   return (
@@ -32,25 +37,25 @@ export function AppRoutes() {
       <Route
         path="/"
         element={
-          <LayoutWrapper>
+          //<LayoutWrapper>
             <Login />
-          </LayoutWrapper>
+          //</LayoutWrapper>
         }
       />
       <Route
         path="/home"
         element={
-          <LayoutWrapper>
+          // <LayoutWrapper>
             <Home />
-          </LayoutWrapper>
+          // </LayoutWrapper>
         }
       />
       <Route
         path="/perfil/:id"
         element={
-          <LayoutWrapper>
+          // <LayoutWrapper>
             <Perfil />
-          </LayoutWrapper>
+          // </LayoutWrapper>
         }
       />
     </Routes>
