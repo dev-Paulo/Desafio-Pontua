@@ -17,10 +17,10 @@ export function Login() {
           <img src={building} alt="" className='w-fit'  />
         </div>
         <div className=" lg:mt-0 lg:col-span-4 lg:flex">
-          <div className='h-80 w-34 bg-white rounded-2xl p-8 flex flex-col'>
-            {/* <CardLogin /> */}
+          <div className='h-full w-34 bg-white rounded-2xl p-8 flex flex-col'>
+            <CardLogin />
             {/* <CardResetPassword /> */}
-            <CardSelect />
+            {/* <CardSelect /> */}
           </div>
         </div>
       </div>
