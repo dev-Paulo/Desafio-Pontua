@@ -97,10 +97,10 @@ export function CardResetPassword({
       {showSuccessMessage && (
         <>
           <div>
-            <h2 className="text-blue-800 font-bold text-3xl tracking-tighter">
+            <h2 className="text-blue-800 font-bold text-3xl tracking-tighter mb-5">
               Tudo certo <span className="text-orange-500">;)</span>
             </h2>
-            <p className="text-gray-500 font-normal text-sm">
+            <p className="text-gray-500 font-normal text-sm mb-4">
               Foi enviado um e-mail para você com instruções de como redefinir a
               sua senha.
             </p>

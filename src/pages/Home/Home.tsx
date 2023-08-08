@@ -59,17 +59,17 @@ export function Home() {
 
       <div className="sm:ml-64 flex-1">
         <Topbar setCharacterSearch={setCharacterSearch} />
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4  p-10 ">
+        <div className="grid md:grid-cols-4 gap-4 p-4 md:p-10">
           {characters?.map((character) => {
             return (
               <a
                 key={character.id}
                 href=""
-                className={`flex flex-col col-span-${
-                  lastTwoItems?.includes(character) && characters.length >= 10
-                    ? "2"
-                    : "1"
-                } p-4 h-auto md:h-48  items-center bg-gray-100 border border-gray-200 rounded-2xl shadow md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`}
+                className={`flex flex-col ${
+                  characters.length >= 10 && lastTwoItems?.includes(character)
+                    ? "md:col-span-2"
+                    : "md:col-span-1"
+                } p-4 h-auto md:h-48 items-center bg-gray-100 border border-gray-200 rounded-2xl shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`}
                 onClick={() => {
                   navigate(`/perfil/${character.id}`);
                   localStorage.setItem(
@@ -80,14 +80,10 @@ export function Home() {
               >
                 <img
                   className="object-cover w-full h-auto rounded-xl md:h-48 md:w-28 max-h-full"
-                  src={
-                    character.thumbnail?.path +
-                    "." +
-                    character.thumbnail?.extension
-                  }
+                  src={`${character.thumbnail?.path}.${character.thumbnail?.extension}`}
                   alt=""
                 />
-                <div className="flex flex-col justify-between p-4 leading-normal">
+                <div className="flex flex-col justify-between p-2 md:p-4 leading-normal">
                   <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                     {character.name}
                   </h5>
