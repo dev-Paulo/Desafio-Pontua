@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logoPontua from "../../assets/logo-pontua.svg";
 import { SignOut, House, User } from "@phosphor-icons/react";
 
 export function Sidebar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const defaultCharacter = localStorage.getItem("defaultCharacter");
+
   return (
     <>
       <button
@@ -47,16 +51,13 @@ export function Sidebar() {
           <ul className="space-y-3 font-medium px-4 mt-2">
             <li>
               <Link
-                // onClick={() => {
-                //   setIndexAtivo(index);
-                //   localStorage.setItem("indexAtivo", index.toString()!);
-                // }}
                 aria-controls="example-collapse-text"
                 to={"/home"}
-                // className={`opcao-menu  ${
-                //   indexAtivo == index ? "activado" : ""
-                // }`}
-                className="flex flex-row items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2"
+                className={`flex flex-row items-center gap-2 rounded-lg p-2 ${
+                  currentPath === "/home"
+                    ? "dark:bg-gray-700 text-orange-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                }`}
                 style={{ textDecoration: "none" }}
               >
                 <House size={28} />
@@ -65,16 +66,13 @@ export function Sidebar() {
             </li>
             <li>
               <Link
-                // onClick={() => {
-                //   setIndexAtivo(index);
-                //   localStorage.setItem("indexAtivo", index.toString()!);
-                // }}
                 aria-controls="example-collapse-text"
-                to={"/perfil"}
-                // className={`opcao-menu  ${
-                //   indexAtivo == index ? "activado" : ""
-                // }`}
-                className="flex flex-row items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2"
+                to={`/perfil/${defaultCharacter}`}
+                className={`flex flex-row items-center gap-2 rounded-lg p-2 ${
+                  currentPath.startsWith("/perfil")
+                    ? " dark:bg-gray-700 text-orange-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                }`}
                 style={{ textDecoration: "none" }}
               >
                 <User size={28} />
@@ -83,16 +81,13 @@ export function Sidebar() {
             </li>
             <li>
               <Link
-                // onClick={() => {
-                //   setIndexAtivo(index);
-                //   localStorage.setItem("indexAtivo", index.toString()!);
-                // }}
                 aria-controls="example-collapse-text"
                 to={"/"}
-                // className={`opcao-menu  ${
-                //   indexAtivo == index ? "activado" : ""
-                // }`}
-                className="flex flex-row items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2"
+                className={`flex flex-row items-center gap-2 rounded-lg p-2 ${
+                  currentPath === "/"
+                    ? " dark:bg-gray-700 text-orange-500"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                }`}
                 style={{ textDecoration: "none" }}
               >
                 <SignOut size={28} />

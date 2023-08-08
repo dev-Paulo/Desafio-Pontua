@@ -40,7 +40,14 @@ export function Home() {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage, characterSearch]);
+  }, [currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(0);
+    if (characterSearch.length != 1) {
+      fetchData();
+    }
+  }, [characterSearch]);
 
   console.log(characterSearch);
 
@@ -65,6 +72,10 @@ export function Home() {
                 } p-4 h-auto md:h-48  items-center bg-gray-100 border border-gray-200 rounded-2xl shadow md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`}
                 onClick={() => {
                   navigate(`/perfil/${character.id}`);
+                  localStorage.setItem(
+                    "defaultCharacter",
+                    character.id.toString()
+                  );
                 }}
               >
                 <img
@@ -130,12 +141,16 @@ export function Home() {
                 </svg>
               </span>
             }
+            breakClassName={
+              "flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }
+            forcePage={currentPage}
             pageCount={Math.ceil(totalCharacters / 10)} // Calculate total pages based on character count
             onPageChange={handlePageChange}
             containerClassName={
               "flex items-center justify-center px-4 h-10 leading-tight "
             }
-            activeClassName={"text-blue-500 bg-blue-100"}
+            activeClassName={"text-white bg-blue-500"}
             pageClassName="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           />
         </div>

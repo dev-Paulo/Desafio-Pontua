@@ -31,6 +31,7 @@ interface CardLoginProps {
 export function CardLogin({ setLoginSuccess }: CardLoginProps) {
   const [showPasswordReset, setShowPasswordReset] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     register,
@@ -47,7 +48,7 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
     if (email === "douglas@pontua.com.br" && senha === "1234") {
       setLoginSuccess(true);
     } else {
-      alert("Login failed");
+      setErrorMessage("Login/Senha incorretos");
     }
     console.log("CONSOLE LOG DO SUBMIT DO FORM");
     console.log(data);
@@ -110,7 +111,11 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
                 className="absolute inset-y-0 right-0 flex items-center cursor-pointer pr-3.5"
                 onClick={togglePasswordVisibility}
               >
-                {showPassword ? <EyeSlash size={22} className="text-blue-500" /> : <Eye size={22}  className="text-blue-500"/>}
+                {showPassword ? (
+                  <EyeSlash size={22} className="text-blue-500" />
+                ) : (
+                  <Eye size={22} className="text-blue-500" />
+                )}
               </div>
             </div>
             {errors?.senha && (
@@ -120,6 +125,16 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
               >
                 {errors?.senha?.message}
               </p>
+            )}
+            {errorMessage != "" ? (
+              <p
+                id="helper-text-explanation"
+                className="text-sm text-red-500 dark:text-gray-400"
+              >
+                {errorMessage}
+              </p>
+            ) : (
+              ""
             )}
             <button
               type="submit"
@@ -154,7 +169,9 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
         </>
       )}
 
-      {showPasswordReset && <CardResetPassword />}
+      {showPasswordReset && (
+        <CardResetPassword setShowPasswordReset={setShowPasswordReset} />
+      )}
     </>
   );
 }

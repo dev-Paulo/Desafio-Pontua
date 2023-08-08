@@ -2,8 +2,7 @@ import { At } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { SetStateAction, useState } from "react";
 
 const passwordResetSchema = z.object({
   email: z
@@ -19,9 +18,14 @@ const passwordResetSchema = z.object({
 
 type PasswordResetFormData = z.infer<typeof passwordResetSchema>;
 
-export function CardResetPassword() {
+interface CardResetPasswordProps {
+  setShowPasswordReset: React.Dispatch<SetStateAction<boolean>>;
+}
+
+export function CardResetPassword({
+  setShowPasswordReset,
+}: CardResetPasswordProps) {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const navigate = useNavigate();
 
   const {
     register,
@@ -105,7 +109,7 @@ export function CardResetPassword() {
           <button
             type="button"
             onClick={() => {
-              navigate("/");
+              setShowPasswordReset(false);
             }}
             className="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-4 font-bold rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >

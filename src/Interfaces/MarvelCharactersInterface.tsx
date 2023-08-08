@@ -17,7 +17,7 @@ export interface Data {
 }
 
 export interface Result {
-  id?: number;
+  id: number;
   name?: string;
   description?: string;
   modified?: string;
