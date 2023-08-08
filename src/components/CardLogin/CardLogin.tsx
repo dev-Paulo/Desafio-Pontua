@@ -50,8 +50,6 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
     } else {
       setErrorMessage("Login/Senha incorretos");
     }
-    console.log("CONSOLE LOG DO SUBMIT DO FORM");
-    console.log(data);
   };
 
   const togglePasswordVisibility = () => {

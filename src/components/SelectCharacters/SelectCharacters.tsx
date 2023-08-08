@@ -29,9 +29,6 @@ export default function SelectCharacters() {
     }
   }
 
-  console.log(characters);
-  console.log(selected);
-
   useEffect(() => {
     fetchData();
   }, [""]);

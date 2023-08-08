@@ -25,8 +25,6 @@ export function Home() {
       const data = response.data;
       setCharacters(data.data.results);
       setTotalCharacters(data.data.total);
-      // Handle the data and update your component state or perform other actions
-      console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -49,17 +47,13 @@ export function Home() {
     }
   }, [characterSearch]);
 
-  console.log(characterSearch);
-
-  console.log(characters);
   return (
-    // <main className="flex-1 ml-64 mt-4 p-10">
     <>
       <Sidebar />
 
       <div className="sm:ml-64 flex-1">
         <Topbar setCharacterSearch={setCharacterSearch} />
-        <div className="grid md:grid-cols-4 gap-4 p-4 md:p-10">
+        <div className="grid md:grid-cols-4 gap-4 p-4 md:p-10 ">
           {characters?.map((character) => {
             return (
               <a
@@ -152,6 +146,5 @@ export function Home() {
         </div>
       </div>
     </>
-    // </main>
   );
 }

@@ -44,8 +44,6 @@ export function CardResetPassword({
     } else {
       alert("Login failed");
     }
-    console.log("CONSOLE LOG DO SUBMIT DO FORM");
-    console.log(data);
   };
   return (
     <>

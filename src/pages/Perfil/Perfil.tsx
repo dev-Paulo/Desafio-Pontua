@@ -34,7 +34,6 @@ export function Perfil() {
     fetchCharacter();
   }, []);
 
-  console.log(character);
   return (
     <>
       <Sidebar />
@@ -47,7 +46,7 @@ export function Perfil() {
           </p>
           <p className="text-2xl font-light ">{character?.name}</p>
         </div>
-        <div className="  border-gray-200 dark:border-gray-700">
+        <div className="border-gray-200 dark:border-gray-700">
           <ul
             className="flex flex-wrap text-sm font-medium text-center"
             id="myTab"
