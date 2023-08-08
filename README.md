@@ -22,3 +22,6 @@ Após clonar o projeto, rode o comando npm install na pasta raiz para instalar a
 ```
 
 - Substitua `SUACHAVEMARVELPUBLICA` pela chave disponivel em My Developer Account
+
+- E-mail para login: douglas@pontua.com.br
+- Senha: 1234
