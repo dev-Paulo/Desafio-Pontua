@@ -1,27 +1,24 @@
-# React + TypeScript + Vite
+# Desafio Pontua - Marvel Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Desafio de front-end para a empresa Pontua.
 
-Currently, two official plugins are available:
+## Como configurar o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Após clonar o projeto, rode o comando npm install na pasta raiz para instalar as dependências necessárias
 
-## Expanding the ESLint configuration
+- Após criar conta no site https://developer.marvel.com/, entre na opção My Developer Account, e no campo de Authorized Referrers, adicione um \* para autorizar as requisições para qualquer domínio.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
+- Crie um arquivo .env na pasta raiz do projeto e adicione as seguintes chaves:
 
 ```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+   VITE_MARVEL_URL=https://gateway.marvel.com/v1/public
+   VITE_MARVEL_PUBLIC_API_KEY=SUACHAVEMARVELPUBLICA
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Execute o servidor web:
+
+```js
+   npm run dev
+```
+
+- Substitua `SUACHAVEMARVELPUBLICA` pela chave disponivel em My Developer Account
