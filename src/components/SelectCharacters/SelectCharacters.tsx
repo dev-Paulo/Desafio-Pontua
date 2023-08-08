@@ -1,17 +1,18 @@
-import { Fragment, SetStateAction, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
 import { CaretDown, Check } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Result } from "../../Interfaces/MarvelCharactersInterface";
 
-function classNames(...classes) {
+function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function SelectCharacters() {
-  const [characters, setCharacters] = useState([]);
-  const [selected, setSelected] = useState({});
+  const [characters, setCharacters] = useState<Result[]>([]);
+  const [selected, setSelected] = useState<Result | undefined>({});
   const publicKey = `${import.meta.env.VITE_MARVEL_PUBLIC_API_KEY}`;
   const navigate = useNavigate();
 
@@ -23,20 +24,18 @@ export default function SelectCharacters() {
       const data = response.data;
       setSelected(data.data.results[0]);
       setCharacters(data.data.results);
-
-      console.log(selected);
-      // Handle the data and update your component state or perform other actions
-      console.log(data);
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   }
 
   console.log(characters);
+  console.log(selected)
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [""]);
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -57,7 +56,7 @@ export default function SelectCharacters() {
                   alt=""
                   className="h-5 w-5 flex-shrink-0 rounded-full"
                 />
-                <span className="ml-3 block truncate">{selected.name}</span>
+                <span className="ml-3 block truncate">{selected?.name}</span>
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                 <CaretDown
@@ -91,9 +90,9 @@ export default function SelectCharacters() {
                         <div className="flex items-center">
                           <img
                             src={
-                              character.thumbnail.path +
+                              character.thumbnail?.path +
                               "." +
-                              character.thumbnail.extension
+                              character.thumbnail?.extension
                             }
                             alt=""
                             className="h-5 w-5 flex-shrink-0 rounded-full"
@@ -128,7 +127,7 @@ export default function SelectCharacters() {
           <div className="flex justify-end">
             <button
               onClick={() => {
-                navigate(`/perfil/${selected.id}`);
+                navigate(`/perfil/${selected?.id}`);
               }}
               type="button"
               className="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-4 font-bold rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

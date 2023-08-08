@@ -75,7 +75,7 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
                 aria-describedby="helper-text-explanation"
                 type="text"
                 id="input-group-1"
-                className="block w-full p-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full p-4 bg-gray-50 border border-gray-300 text-blue-500 text-base font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Informe seu e-mail"
                 {...register("email", {
                   required: true,
@@ -83,7 +83,7 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
               />
 
               <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3.5">
-                <At size={17} />
+                <At size={22} className="text-blue-500" />
               </div>
             </div>
             {errors?.email && (
@@ -100,7 +100,7 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
                 aria-describedby="helper-text-explanation"
                 type={showPassword ? "text" : "password"}
                 id="input-group-1"
-                className="block w-full p-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full p-4 bg-gray-50 border border-gray-300 text-blue-500 text-base font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Informe sua senha"
                 {...register("senha", {
                   required: true,
@@ -110,7 +110,7 @@ export function CardLogin({ setLoginSuccess }: CardLoginProps) {
                 className="absolute inset-y-0 right-0 flex items-center cursor-pointer pr-3.5"
                 onClick={togglePasswordVisibility}
               >
-                {showPassword ? <EyeSlash size={17} /> : <Eye size={17} />}
+                {showPassword ? <EyeSlash size={22} className="text-blue-500" /> : <Eye size={22}  className="text-blue-500"/>}
               </div>
             </div>
             {errors?.senha && (
